@@ -1,3 +1,4 @@
+import fs from 'fs';
 import * as anchor from "@coral-xyz/anchor";
 import { Program, BN } from "@coral-xyz/anchor";
 import { RaydiumCpSwap } from "../target/types/raydium_cp_swap";
@@ -10,10 +11,14 @@ import {
 } from "./utils";
 import { assert } from "chai";
 import { MAX_FEE_BASIS_POINTS, TOKEN_PROGRAM_ID } from "@solana/spl-token";
+import { Keypair } from "@solana/web3.js";
 
 describe("deposit test", () => {
   anchor.setProvider(anchor.AnchorProvider.env());
-  const owner = anchor.Wallet.local().payer;
+  const filePath = process.cwd() + '/owner.json';
+  const Array = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const keypair = Keypair.fromSecretKey(Uint8Array.from(Array));
+  const owner = keypair;
 
   const program = anchor.workspace.RaydiumCpSwap as Program<RaydiumCpSwap>;
 
@@ -220,12 +225,12 @@ describe("deposit test", () => {
     // Add the same liquidity, the amount increment of the pool vault will be the same as without fees.
     assert.equal(
       poolVault0TokenAccountAfter2.amount -
-        poolVault0TokenAccountBefore2.amount,
+      poolVault0TokenAccountBefore2.amount,
       input_token0_amount
     );
     assert.equal(
       poolVault1TokenAccountAfter2.amount -
-        poolVault1TokenAccountBefore2.amount,
+      poolVault1TokenAccountBefore2.amount,
       input_token1_amount
     );
 
@@ -313,23 +318,23 @@ describe("deposit test", () => {
     if (poolState.token0Program.equals(TOKEN_PROGRAM_ID)) {
       assert.equal(
         poolVault0TokenAccountAfter.amount -
-          poolVault0TokenAccountBefore.amount,
+        poolVault0TokenAccountBefore.amount,
         input_token0_amount
       );
       assert.equal(
         poolVault1TokenAccountAfter.amount -
-          poolVault1TokenAccountBefore.amount,
+        poolVault1TokenAccountBefore.amount,
         input_token1_amount - BigInt(transferFeeConfig.MaxFee)
       );
     } else {
       assert.equal(
         poolVault0TokenAccountAfter.amount -
-          poolVault0TokenAccountBefore.amount,
+        poolVault0TokenAccountBefore.amount,
         input_token0_amount - BigInt(transferFeeConfig.MaxFee)
       );
       assert.equal(
         poolVault1TokenAccountAfter.amount -
-          poolVault1TokenAccountBefore.amount,
+        poolVault1TokenAccountBefore.amount,
         input_token1_amount
       );
     }

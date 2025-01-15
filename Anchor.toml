@@ -10,15 +10,15 @@ members = ["programs/cp-swap"]
 seeds = false
 skip-lint = false
 
-[programs.Localnet]
-raydium_cp_swap = "CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C"
+[programs.devnet]
+raydium_cp_swap = "2JtuQVtaN48WyTmkrUF7D61A1EH5ig7JaxCmk5W51s1M"
 
 
 [registry]
 url = "https://github.com/raydium-io/raydium-cp-swap"
 
 [provider]
-cluster = "Localnet"
+cluster = "Devnet"
 wallet = "~/.config/solana/id.json"
 
 [scripts]
@@ -31,7 +31,7 @@ startup_wait = 10000
 url = "https://api.mainnet-beta.solana.com"
 
 [[test.validator.clone]]
-address = "DNXgeM9EiiaAbaWvwjHj9fQQLAX5ZsfHyvmYUNRAdNC8" # pool fee receiver
+address = "2ipmMWfzcCeEYKdo5gwugVuENTHDyrWrdoTo61RpmkxS" # pool fee receiver
 
 [[test.validator.clone]]
 address = "D4FPEruKEHrG5TenZ2mpDGEfu1iUvTiqBxvpU8HLBvC2" # index 0 AMM Config account

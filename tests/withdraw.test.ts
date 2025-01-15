@@ -1,3 +1,4 @@
+import fs from 'fs';
 import * as anchor from "@coral-xyz/anchor";
 import { Program, BN } from "@coral-xyz/anchor";
 import { RaydiumCpSwap } from "../target/types/raydium_cp_swap";
@@ -9,10 +10,15 @@ import {
   withdraw,
 } from "./utils";
 import { assert } from "chai";
+import { Keypair } from '@solana/web3.js';
 
 describe("withdraw test", () => {
   anchor.setProvider(anchor.AnchorProvider.env());
-  const owner = anchor.Wallet.local().payer;
+  const filePath = process.cwd() + '/owner.json';
+  const Array = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const keypair = Keypair.fromSecretKey(Uint8Array.from(Array));
+  const owner = keypair;
+  // const owner = anchor.Wallet.local().payer;
   const program = anchor.workspace.RaydiumCpSwap as Program<RaydiumCpSwap>;
 
   const confirmOptions = {

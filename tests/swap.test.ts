@@ -1,13 +1,19 @@
+import fs from 'fs';
 import * as anchor from "@coral-xyz/anchor";
 import { Program, BN } from "@coral-xyz/anchor";
 import { RaydiumCpSwap } from "../target/types/raydium_cp_swap";
 import { setupSwapTest, swap_base_input, swap_base_output } from "./utils";
 import { assert } from "chai";
 import { getAccount, getAssociatedTokenAddressSync } from "@solana/spl-token";
+import { Keypair } from '@solana/web3.js';
 
 describe("swap test", () => {
   anchor.setProvider(anchor.AnchorProvider.env());
-  const owner = anchor.Wallet.local().payer;
+  const filePath = process.cwd() + '/owner.json';
+  const Array = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const keypair = Keypair.fromSecretKey(Uint8Array.from(Array));
+  const owner = keypair;
+  // const owner = anchor.Wallet.local().payer;
 
   const program = anchor.workspace.RaydiumCpSwap as Program<RaydiumCpSwap>;
 

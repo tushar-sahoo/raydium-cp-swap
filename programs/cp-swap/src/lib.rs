@@ -19,25 +19,16 @@ solana_security_txt::security_txt! {
     auditors: "https://github.com/raydium-io/raydium-docs/blob/master/audit/MadShield%20Q1%202024/raydium-cp-swap-v-1.0.0.pdf"
 }
 
-#[cfg(feature = "devnet")]
-declare_id!("CPMDWBwJDtYax9qW7AyRuVC19Cc4L4Vcy4n2BHAbHkCW");
-#[cfg(not(feature = "devnet"))]
-declare_id!("CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C");
+declare_id!("2JtuQVtaN48WyTmkrUF7D61A1EH5ig7JaxCmk5W51s1M");
 
 pub mod admin {
     use anchor_lang::prelude::declare_id;
-    #[cfg(feature = "devnet")]
-    declare_id!("adMCyoCgfkg7bQiJ9aBJ59H3BXLY3r5LNLfPpQfMzBe");
-    #[cfg(not(feature = "devnet"))]
-    declare_id!("GThUX1Atko4tqhN2NaiTazWSeFWMuiUvfFnyJyUghFMJ");
+    declare_id!("D8RwkKF7vw1mKs7p9WL5LTvr56fsUBfkAT5dBnm8ubAy");
 }
 
 pub mod create_pool_fee_reveiver {
     use anchor_lang::prelude::declare_id;
-    #[cfg(feature = "devnet")]
-    declare_id!("G11FKBRaAkHAKuLCgLM6K6NUc9rTjPAznRCjZifrTQe2");
-    #[cfg(not(feature = "devnet"))]
-    declare_id!("DNXgeM9EiiaAbaWvwjHj9fQQLAX5ZsfHyvmYUNRAdNC8");
+    declare_id!("vA8keeXqc4XBDUkCdTasNg4sWYqRceoEmDqzFUFuB2i");
 }
 
 pub const AUTH_SEED: &str = "vault_and_lp_mint_auth_seed";
