@@ -8,4 +8,5 @@ test-ledger
 .vscode
 .yarn
 Makefile
+owner.json
 
